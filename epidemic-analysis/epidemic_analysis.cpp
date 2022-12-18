@@ -22,7 +22,7 @@ vector<vector<int>> read_graph(string filepath) {
 	}
 	file.close();
 	
-	graph.reserve(max_idx + 1);
+	graph.resize(max_idx + 1);
 	for(auto edge: edges) {
 		graph[edge.first].push_back(edge.second);
 		graph[edge.second].push_back(edge.first);
