@@ -1,12 +1,23 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <random>
+#include <climits>
 
 #define SUSCEPTIBLE 0
 #define INFECTED 1
 #define REMOVED 2
 
 using namespace std;
+
+uniform_int_distribution<mt19937::result_type> udist(0, INT_MAX);
+mt19937 rng;
+
+int random_number(int exclusive_max_number = -1) {
+	if(exclusive_max_number > -1)
+		return udist(rng) % exclusive_max_number;
+	return udist(rng);
+}
 
 vector<vector<int>> read_graph(string filepath) {
 	vector<vector<int>> graph;
@@ -40,12 +51,14 @@ private:
 	double omega;
 	double t;
 public:
-	EpidemicModeling(string filepath, double beta, double omega, int first_infected = 0) {
+	EpidemicModeling(string filepath, double beta, double omega, int first_infected = -1) {
 		this->graph = read_graph(filepath);
 		this->beta = beta;
 		this->omega = omega;
 		
-		this->status = vector<int>(graph.size(), SUSCEPTIBLE);
+		first_infected = (first_infected == -1 ? random_number(graph.size()) : first_infected);
+		
+		this->status.resize(graph.size(), SUSCEPTIBLE);
 		this->status[first_infected] = INFECTED;
 		this->t = 0;
 	}
@@ -53,6 +66,8 @@ public:
 
 int main(void) {
 	ios_base::sync_with_stdio(false);
+	
+	rng.seed(50);
 	
 	EpidemicModeling G("../input/ba_10000_3.txt", 0.2, 0.1);
 	
