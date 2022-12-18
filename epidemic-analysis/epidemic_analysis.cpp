@@ -7,6 +7,8 @@
 #define SUSCEPTIBLE 0
 #define INFECTED 1
 #define REMOVED 2
+#define TO_BE_INFECTED -1
+#define TO_BE_REMOVED -2
 
 using namespace std;
 
@@ -54,6 +56,35 @@ private:
 	double beta;
 	double omega;
 	double t;
+	int susceptibles, infecteds, removeds;
+	
+	void try_to_infect(int person) {
+		if(status[person] == SUSCEPTIBLE) {
+			double r = random_until_1();
+			if(r <= beta) {
+				status[person] = TO_BE_INFECTED;
+				infecteds++;
+				susceptibles--;
+			}
+		}
+	}
+	
+	void try_to_remove(int person) {
+		if(status[person] == INFECTED) {
+			double r = random_until_1();
+			if(r <= omega) {
+				status[person] = TO_BE_REMOVED;
+				removeds++;
+				infecteds--;
+			}
+		}
+	}
+	
+	void apply_status(int person) {
+		if(status[person] == TO_BE_INFECTED) status[person] = INFECTED;
+		if(status[person] == TO_BE_REMOVED) status[person] = REMOVED;
+	}
+	
 public:
 	EpidemicModeling(string filepath, double beta, double omega, int first_infected = -1) {
 		this->graph = read_graph(filepath);
@@ -65,6 +96,36 @@ public:
 		this->status.resize(graph.size(), SUSCEPTIBLE);
 		this->status[first_infected] = INFECTED;
 		this->t = 0;
+		
+		this->susceptibles = graph.size() - 1;
+		this->infecteds = 1;
+		this->removeds = 0;
+	}
+	
+
+	
+	void run(int max_time) {
+		print_statistics();
+		
+		while(t < max_time) {
+			for(int u = 0; u < (int)graph.size(); u++) {
+				if(status[u] == INFECTED) {
+					for(int v = 0; v < (int)graph[u].size(); v++) {
+						try_to_infect(graph[u][v]);
+					}
+					try_to_remove(u);
+				}
+			}
+
+			for(int u = 0; u < (int)graph.size(); u++) apply_status(u);
+
+			t++;
+			print_statistics();
+		}
+	}
+	
+	void print_statistics() {
+		cout << "t = " << t << ": " << susceptibles << " susceptibles, " << infecteds << " infecteds, " << removeds << " removeds" << endl;
 	}
 };
 
@@ -73,7 +134,8 @@ int main(void) {
 	
 	rng.seed(50);
 	
-	EpidemicModeling G("../input/ba_10000_3.txt", 0.2, 0.1);
+	EpidemicModeling G("../input/ba_10000_3.txt", 0.1, 0.1);
+	G.run(50);
 	
 	return 0;
 }
