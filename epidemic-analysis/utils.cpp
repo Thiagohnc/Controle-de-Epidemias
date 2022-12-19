@@ -2,13 +2,14 @@
 #include <climits>
 #include <vector>
 #include <fstream>
+#include "utils.hpp"
 
 using namespace std;
 
 uniform_int_distribution<mt19937::result_type> udist(0, INT_MAX);
 mt19937 rng;
 
-int random_int(int exclusive_max_number = -1) {
+int random_int(int exclusive_max_number /*= -1*/) {
 	if(exclusive_max_number > -1)
 		return udist(rng) % exclusive_max_number;
 	return udist(rng);
