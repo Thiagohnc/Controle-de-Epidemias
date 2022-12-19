@@ -1,5 +1,11 @@
+#ifndef EPIDEMIC_MODELING_H
+#define EPIDEMIC_MODELING_H
+
+#include <vector>
+#include <string>
+
 class EpidemicModeling {
-private:
+protected:
 	std::vector<std::vector<int>> graph;
 	std::vector<int> status;
 	double beta;
@@ -17,3 +23,5 @@ public:
 	void run(int max_time);
 	void print_statistics();
 };
+
+#endif
