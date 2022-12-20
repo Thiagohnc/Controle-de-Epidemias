@@ -13,7 +13,7 @@ protected:
     virtual void process_after_iteration();
 
 public:
-    void run(int max_time);
+    virtual void run(int max_time) override;
     ControledEpidemicModeling(std::string filepath, double beta, double omega, int first_infected = -1);
 };
 

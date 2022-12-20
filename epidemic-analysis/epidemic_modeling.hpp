@@ -21,7 +21,7 @@ public:
     EpidemicModeling(std::string filepath, double beta, double omega, int first_infected = -1);
     EpidemicModeling();
 
-    void run(int max_time);
+    virtual void run(int max_time);
     void print_statistics();
 };
 

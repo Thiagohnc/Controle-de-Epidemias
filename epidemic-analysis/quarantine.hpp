@@ -11,9 +11,9 @@ protected:
     bool quarantine_in_progress;
     int days_until_quarantine_is_over;
 
-    void try_to_infect_with_control_method(int person);
+    virtual void try_to_infect_with_control_method(int person) override;
     void update_quarantine_state();
-    void process_after_iteration();
+    virtual void process_after_iteration() override;
 
 public:
     QuarantineEpidemicModeling(std::string filepath,
