@@ -6,19 +6,22 @@
 
 using namespace std;
 
-int main(void) {
+int main(int argc, char *argv[]) {
     ios_base::sync_with_stdio(false);
     
+    EpidemicModeling E;
+    
     set_rng_seed(50);
+    string control_method = argv[1];
     
-    EpidemicModeling no_control("../input/ws_10000_8_0.1.txt", 0.1, 0.05);
-    no_control.run(200);
+    if(control_method == "NoControl") {
+        E = EpidemicModeling(argv[2], atof(argv[3]), atof(argv[4]));
+    }
+    else if(control_method == "Quarantine") {
+        E = QuarantineEpidemicModeling(argv[2], atof(argv[3]), atof(argv[4]), atof(argv[5]), atof(argv[6]), atof(argv[7]));
+    }
     
-    QuarantineEpidemicModeling quarantine("../input/ws_10000_8_0.1.txt", 0.1, 0.05, 0.4, 0.15, 14);
-    quarantine.run(200);
-    
-    QuarantineEpidemicModeling quarantine_severe("../input/ws_10000_8_0.1.txt", 0.1, 0.05, 0.4, 0.001, 30);
-    quarantine_severe.run(200);
+    E.run(365 * 2);
     
     return 0;
 }
