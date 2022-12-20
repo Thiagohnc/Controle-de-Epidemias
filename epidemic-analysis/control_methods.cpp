@@ -42,7 +42,7 @@ void ControledEpidemicModeling::try_to_remove_with_control_method(int person) {
     try_to_remove(person);
 }
 
-void ControledEpidemicModeling::ControledEpidemicModeling::init_control_method() {}
-void ControledEpidemicModeling::ControledEpidemicModeling::finish_control_method() {}
+void ControledEpidemicModeling::init_control_method() {}
+void ControledEpidemicModeling::finish_control_method() {}
 void ControledEpidemicModeling::process_before_iteration() {}
 void ControledEpidemicModeling::process_after_iteration() {}
