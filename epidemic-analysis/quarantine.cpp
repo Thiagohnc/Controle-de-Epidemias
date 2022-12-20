@@ -16,7 +16,7 @@ void QuarantineEpidemicModeling::try_to_infect_with_control_method(int person) {
 }
 
 void QuarantineEpidemicModeling::update_quarantine_state() {
-	bool infected_fraction = (double) infecteds / (susceptibles + infecteds + removeds);
+	double infected_fraction = (double) infecteds / (susceptibles + infecteds + removeds);
 	
 	if(infected_fraction > warning_state) {
 		quarantine_in_progress = true;
