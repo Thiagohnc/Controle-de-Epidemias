@@ -3,6 +3,7 @@
 #include "utils.hpp"
 #include "epidemic_modeling.hpp"
 #include "quarantine.hpp"
+#include "random_vaccination.hpp"
 
 using namespace std;
 
@@ -19,6 +20,9 @@ int main(int argc, char *argv[]) {
     }
     else if(control_method == "Quarantine") {
         E = new QuarantineEpidemicModeling(argv[2], atof(argv[3]), atof(argv[4]), atof(argv[5]), atof(argv[6]), atof(argv[7]));
+    }
+    else if(control_method == "RandomVaccination") {
+        E = new RandomVaccinationEpidemicModeling(argv[2], atof(argv[3]), atof(argv[4]), atof(argv[5]), atof(argv[6]));
     }
     
     E->run(365 * 2);
