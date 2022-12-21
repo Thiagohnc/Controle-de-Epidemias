@@ -4,6 +4,7 @@
 #include "epidemic_modeling.hpp"
 #include "quarantine.hpp"
 #include "random_vaccination.hpp"
+#include "degree_vaccination.hpp"
 
 using namespace std;
 
@@ -23,6 +24,13 @@ int main(int argc, char *argv[]) {
     }
     else if(control_method == "RandomVaccination") {
         E = new RandomVaccinationEpidemicModeling(argv[2], atof(argv[3]), atof(argv[4]), atof(argv[5]), atof(argv[6]));
+    }
+    else if(control_method == "DegreeVaccination") {
+        E = new DegreeVaccinationEpidemicModeling(argv[2], atof(argv[3]), atof(argv[4]), atof(argv[5]), atof(argv[6]));
+    }
+    else {
+        cout << "Invalid Control Method: " << control_method << endl;
+        return 1;
     }
     
     E->run(365 * 2);

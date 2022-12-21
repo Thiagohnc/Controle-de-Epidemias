@@ -1,11 +1,11 @@
-#ifndef RANDOM_VACCINATION_H
-#define RANDOM_VACCINATION_H
+#ifndef DEGREE_VACCINATION_H
+#define DEGREE_VACCINATION_H
 
 #include "vaccination.hpp"
 
-class RandomVaccinationEpidemicModeling : public VaccinationEpidemicModeling {
+class DegreeVaccinationEpidemicModeling : public VaccinationEpidemicModeling {
 public:
-    RandomVaccinationEpidemicModeling(std::string filepath,
+    DegreeVaccinationEpidemicModeling(std::string filepath,
                                       double beta,
                                       double omega,
                                       double vaccination_rate,

@@ -1,10 +1,13 @@
 all: clean epidemic_analysis
 
-epidemic_analysis: epidemic_analysis.o utils.o epidemic_modeling.o control_methods.o quarantine.o vaccination.o random_vaccination.o
-	g++ epidemic_analysis.o utils.o epidemic_modeling.o control_methods.o quarantine.o vaccination.o random_vaccination.o -o epidemic_analysis -Wall
+epidemic_analysis: epidemic_analysis.o utils.o epidemic_modeling.o control_methods.o quarantine.o vaccination.o random_vaccination.o degree_vaccination.o
+	g++ epidemic_analysis.o utils.o epidemic_modeling.o control_methods.o quarantine.o vaccination.o random_vaccination.o degree_vaccination.o -o epidemic_analysis -Wall
 
 epidemic_analysis.o: epidemic_analysis.cpp utils.hpp epidemic_modeling.hpp
 	g++ epidemic_analysis.cpp -c -o epidemic_analysis.o -Wall
+	
+degree_vaccination.o: degree_vaccination.cpp degree_vaccination.hpp vaccination.hpp control_methods.hpp utils.hpp
+	g++ degree_vaccination.cpp -c -o degree_vaccination.o -Wall
 
 random_vaccination.o: random_vaccination.cpp random_vaccination.hpp vaccination.hpp control_methods.hpp utils.hpp
 	g++ random_vaccination.cpp -c -o random_vaccination.o -Wall

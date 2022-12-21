@@ -2,7 +2,6 @@
 #include "vaccination.hpp"
 #include "status_constants.hpp"
 #include "utils.hpp"
-#include <iostream>
 
 void VaccinationEpidemicModeling::try_to_infect_with_control_method(int person) {
     if(status[person] == SUSCEPTIBLE && immunized[person] == false) {
