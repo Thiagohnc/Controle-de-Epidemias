@@ -72,5 +72,5 @@ void EpidemicModeling::run(int max_time) {
 }
 
 void EpidemicModeling::print_statistics() {
-    cout << "t = " << t << ": " << susceptibles << " susceptibles, " << infecteds << " infecteds, " << removeds << " removeds" << endl;
+    cout << t << " " << susceptibles << " " << infecteds << " " << removeds << endl;
 }
