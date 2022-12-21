@@ -11,10 +11,14 @@ EpidemicModeling::EpidemicModeling(string filepath, double beta, double omega, i
     this->beta = beta;
     this->omega = omega;
     
-    first_infected = (first_infected == -1 ? random_int(graph.size()) : first_infected);
-    
     this->status.resize(graph.size(), SUSCEPTIBLE);
-    this->status[first_infected] = INFECTED;
+    
+    // Infects 5 random persons
+    for(int i = 0; i < 5; i++) {
+        int infected = random_int(graph.size());
+        this->status[infected] = INFECTED;
+    }
+    
     this->t = 0;
     
     this->susceptibles = graph.size() - 1;

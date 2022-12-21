@@ -26,9 +26,5 @@ DegreeVaccinationEpidemicModeling::DegreeVaccinationEpidemicModeling(std::string
         vaccination_queue.push(vaccination_order[i].second);
     }
     
-    std::cout << -vaccination_order[0].first << " " << vaccination_order[0].second << std::endl;
-    std::cout << -vaccination_order[1].first << " " << vaccination_order[1].second << std::endl;
-    std::cout << -vaccination_order[2].first << " " << vaccination_order[2].second << std::endl;
-    
     vaccination_order.clear();
 }
