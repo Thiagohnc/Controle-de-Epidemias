@@ -1,10 +1,10 @@
-all: clean epidemic_analysis
+all: clean simulation
 
-epidemic_analysis: epidemic_analysis.o utils.o epidemic_modeling.o control_methods.o quarantine.o vaccination.o random_vaccination.o degree_vaccination.o
-	g++ epidemic_analysis.o utils.o epidemic_modeling.o control_methods.o quarantine.o vaccination.o random_vaccination.o degree_vaccination.o -o epidemic_analysis -Wall
+simulation: simulation.o utils.o epidemic_modeling.o control_methods.o quarantine.o vaccination.o random_vaccination.o degree_vaccination.o
+	g++ simulation.o utils.o epidemic_modeling.o control_methods.o quarantine.o vaccination.o random_vaccination.o degree_vaccination.o -o simulation -Wall
 
-epidemic_analysis.o: epidemic_analysis.cpp utils.hpp epidemic_modeling.hpp
-	g++ epidemic_analysis.cpp -c -o epidemic_analysis.o -Wall
+simulation.o: simulation.cpp utils.hpp epidemic_modeling.hpp
+	g++ simulation.cpp -c -o simulation.o -Wall
 	
 degree_vaccination.o: degree_vaccination.cpp degree_vaccination.hpp vaccination.hpp control_methods.hpp utils.hpp
 	g++ degree_vaccination.cpp -c -o degree_vaccination.o -Wall
@@ -28,4 +28,4 @@ utils.o: utils.cpp utils.hpp
 	g++ utils.cpp -c -o utils.o -Wall
 
 clean:
-	rm -rf *.o *~ epidemic_analysis
+	rm -rf *.o *~ simulation
