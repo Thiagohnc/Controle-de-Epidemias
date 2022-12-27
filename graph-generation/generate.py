@@ -1,16 +1,16 @@
+import global_config
 import gnp
 import barabasi_albert
 import watts_strogatz
+import graph_seeds
 
 
-def generate():
-    gnp.generate_graph(10000, 0.1)
-    gnp.generate_graph(10000, 0.2)
-    barabasi_albert.generate_graph(10000, 3)
-    barabasi_albert.generate_graph(10000, 4)
-    watts_strogatz.generate_graph(10000, 8, 0.1)
-    watts_strogatz.generate_graph(10000, 10, 0.2)
+def generate(ngraphs):
+    gnp.generate_graph(n=100000, p=0.0005, ngraphs=ngraphs)
+    barabasi_albert.generate_graph(n=100000, m=50, ngraphs=ngraphs)
+    watts_strogatz.generate_graph(n=100000, k=50, p=0.1, ngraphs=ngraphs)
 
 
 if __name__ == '__main__':
-    generate()
+    graph_seeds.init(global_config.seed, global_config.ngraphs)
+    generate(global_config.ngraphs)
