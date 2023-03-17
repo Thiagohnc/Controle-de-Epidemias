@@ -68,32 +68,3 @@ if __name__ == '__main__':
     fig.set_figwidth(9)
     fig.tight_layout()
     plt.savefig(plot_path)
-
-'''
-    folder = args[0]
-    plot_filepath = args[1]
-    title = ' '.join(args[2:])
-
-    input_files = list_files_in_folder(folder)
-    list_t, list_susceptibles, list_infecteds, list_removeds = [], [], [], []
-    for input_file in input_files:
-        data = read_file(input_file)
-        t, susceptibles, infecteds, removeds = normalize_data(data)
-        list_t.append(t)
-        list_susceptibles.append(susceptibles)
-        list_infecteds.append(infecteds)
-        list_removeds.append(removeds)
-
-    mean_t = sum(list_t)/len(input_files)
-    mean_susceptibles = sum(list_susceptibles)/len(input_files)
-    mean_infecteds = sum(list_infecteds)/len(input_files)
-    mean_removeds = sum(list_removeds)/len(input_files)
-
-    plt.plot(mean_t, mean_susceptibles, '--', label="suscetível", color='green')
-    plt.plot(mean_t, mean_infecteds, '-', label="infectado", color='red')
-    plt.plot(mean_t, mean_removeds, ':', label="removido", color='orange')
-    plt.legend()
-    plt.title(title)
-    plt.savefig(plot_filepath)
-
-'''
