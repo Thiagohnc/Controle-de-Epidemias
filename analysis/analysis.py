@@ -52,7 +52,7 @@ if __name__ == '__main__':
     rows = len(args[2:])//2
 
     model_tags = ['gnp', 'ba', 'ws']
-    model_names = ['G(n,p)', 'BA', 'WS']
+    model_names = ['ER', 'BA', 'WS']
     for i in range(rows):
         folders.append([])
         titles.append([])
