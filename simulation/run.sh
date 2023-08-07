@@ -1,3 +1,23 @@
+for model in gnp ba ws; do
+	mkdir -p ../output/$model/$vac/no_control
+	
+	for vac in degree_vaccination random_vaccination; do
+		for ir_val in 30 45 60 75; do
+			mkdir -p ../output/$model/$vac/immunization_rate/i$ir_val
+		done
+		for vr_val in 01 02 03 005; do
+			mkdir -p ../output/$model/$vac/vaccination_rate/v$vr_val
+		done
+	done
+	
+	for ad_val in 30 45 60 75; do
+		mkdir -p ../output/$model/quarantine/adherence/a$ad_val
+	done
+	for time_val in w001_t60 w01_t15 w005_t30 w05_t7; do
+		mkdir -p ../output/$model/quarantine/time/$time_val
+	done
+done
+
 SECONDS=0
 echo 'Running No Control...'
 ../scripts/run_no_control.sh
