@@ -34,6 +34,13 @@ def get_statistics(folder):
     return mean_t, mean_susceptibles, mean_infecteds, mean_removeds
 
 
+def set_time_upperbound(_t, _susceptibles, _infecteds, _removeds, tmax=200):
+    while tmax < len(_removeds) and _removeds[tmax] > _removeds[tmax-20] + 0.01:
+        tmax += 1
+
+    return _t[:tmax], _susceptibles[:tmax], _infecteds[:tmax], _removeds[:tmax]
+
+
 if __name__ == '__main__':
     args = sys.argv[1:]
 
@@ -57,10 +64,13 @@ if __name__ == '__main__':
     for i in range(rows):
         for j in range(3):
             t, susceptibles, infecteds, removeds = get_statistics(folders[i][j])
+            t, susceptibles, infecteds, removeds = set_time_upperbound(t, susceptibles, infecteds, removeds)
             ax = axs[i, j] if len(args[1:])//2 > 1 else axs[j]
             ax.plot(t, susceptibles, '--', label="suscetível", color='green')
             ax.plot(t, infecteds, '-', label="infectado", color='red')
             ax.plot(t, removeds, ':', label="removido", color='orange')
+            ax.set_xlabel('Tempo')
+            ax.set_ylabel('Fração de indivíduos')
             ax.set_title(titles[i][j])
 
     fig.suptitle(suptitle)
