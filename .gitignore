@@ -3,5 +3,4 @@ __pycache__
 /input/*.txt
 epidemic_analysis
 *.o
-run*.sh
 *.out
